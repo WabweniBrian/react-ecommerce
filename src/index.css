@@ -1,13 +1,257 @@
-body {
+/* Importing Fonts */
+@import url("https://fonts.googleapis.com/css2?family=Montserrat&family=Mulish&family=Nunito&family=Nunito+Sans:wght@400;600&family=Poppins:ital,wght@0,400;0,500;1,300;1,400&family=Questrial&family=Raleway&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+* {
+  @apply scroll-smooth scroll-pt-9;
+}
+
+*::-webkit-scrollbar {
+  @apply w-[5px] h-[5px];
+}
+
+*::-webkit-scrollbar-thumb {
+  @apply rounded bg-slate-400;
+}
+
+*::-webkit-scrollbar-track {
+  @apply !bg-transparent;
+}
+
+@font-face {
+  font-family: myFont;
+  src: url("../public/Questrial-Regular.ttf") format("truetype");
+}
+
+body {
+  @apply font-questrial text-text-color;
+  font-family: myFont;
+}
+
+.back-to-top-btn {
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s ease-in-out;
+}
+
+.back-to-top-btn.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+a {
+  @apply transition-a cursor-default sm:cursor-pointer hover:text-accent select-none;
+}
+
+.flex1 {
+  flex: 1;
+}
+
+.flex-2 {
+  flex: 2;
+}
+.flex-5 {
+  flex: 5;
+}
+
+.active {
+  @apply text-accent;
+}
+
+@keyframes scroll {
+  0% {
+    opacity: 0;
+    transform: translateY(-100px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+h1 {
+  @apply capitalize font-bold;
+}
+
+h4 {
+  @apply font-bold uppercase;
+}
+
+p {
+  @apply !opacity-70 !text-secondary;
+}
+
+.btn {
+  @apply px-6 py-[0.3rem] uppercase bg-primary text-white transition-a hover:bg-secondary rounded-full;
+}
+
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+input:autofill,
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+  @apply input-shadow;
+}
+
+.input-check label,
+.input-radio label {
+  @apply relative cursor-pointer flex items-center text-slate-500 select-none;
+}
+
+.input-check input[type="checkbox"],
+.input-radio input[type="radio"] {
+  @apply cursor-pointer opacity-0 absolute;
+}
+
+.input-check label::before {
+  content: "";
+  @apply w-4 h-4 mr-2 rounded border border-accent;
+}
+
+.input-check input[type="checkbox"]:checked + label::before {
+  content: "✔";
+  @apply grid place-items-center text-slate-100 text-[0.7rem] bg-accent;
+}
+
+.input-radio label::before {
+  content: "";
+  @apply w-4 h-4 mr-2 rounded-full border border-accent;
+}
+.input-radio label::after {
+  content: "";
+  @apply absolute w-2 h-2 top-1/2 left-0 -translate-y-1/2 scale-0 ml-[0.2rem] bg-accent transition-a rounded-full;
+}
+
+.input-radio input[type="radio"]:checked + label::after {
+  @apply -translate-y-1/2 scale-100;
+}
+
+header a,
+footer a {
+  @apply text-[#b0b7bb] !opacity-100 text-sm;
+}
+
+footer p,
+.attribution {
+  @apply !text-[#b0b7bb] !opacity-100;
+}
+
+footer h1 {
+  @apply text-[#f7fdff];
+}
+
+footer a {
+  @apply hover:pl-2  capitalize;
+}
+
+section,
+footer {
+  @apply px-[4%];
+}
+
+header .icon-box {
+  @apply sm:cursor-pointer w-10 h-10 grid place-items-center text-xl rounded-full hover:bg-secondary transition-a;
+}
+
+header .icon-box .count {
+  @apply w-5 h-5 grid place-items-center rounded-full absolute -top-1 -right-1  bg-accent text-xs   text-white;
+}
+
+.open {
+  @apply max-h-screen;
+}
+
+.heading {
+  @apply w-fit relative before:absolute before:h-[3px] before:w-1/2 before:bg-accent before:left-0 before:bottom-0;
+}
+
+.product-icons {
+  @apply sm:cursor-pointer p-2 hover:text-accent md:translate-x-20 md:opacity-0 group-hover:translate-x-0 group-hover:opacity-100 transition-a;
+}
+
+.count-down-box {
+  @apply w-7 h-7 grid place-items-center bg-red-500 text-white rounded-full text-center;
+}
+
+.circle {
+  @apply w-5 h-5 rounded-full transition-a sm:cursor-pointer hover:border-2 hover:border-white;
+}
+
+.circle:hover,
+.circle.active {
+  border: 2px solid #fff;
+  box-shadow: 0 0 0 2px teal;
+}
+
+.circle:nth-child(2):hover,
+.circle:nth-child(2).active {
+  box-shadow: 0 0 0 2px #654c01;
+}
+
+.circle:nth-child(3):hover,
+.circle:nth-child(3).active {
+  box-shadow: 0 0 0 2px #5d1c07;
+}
+
+.form-input input,
+.form-input textarea {
+  @apply outline-none h-8 border border-[lightgray] rounded-md px-[0.8rem] transition-a w-full text-base mb-5;
+}
+
+.form-input label {
+  @apply absolute top-[0.15rem] left-[0.9rem] text-[#8d9193] transition-a  px-[0.15rem] pointer-events-none;
+}
+
+.form-input input:focus,
+.form-input input:valid,
+.form-input textarea:focus,
+.form-input textarea:valid {
+  @apply !border-green-500;
+}
+
+.form-input input:focus ~ label,
+.form-input input:valid ~ label,
+input:-webkit-autofill ~ label,
+.form-input textarea:focus ~ label,
+.form-input textarea:valid ~ label {
+  @apply -top-[12px] left-[15px] text-sm text-green-500 bg-white;
+}
+
+.loader {
+  @apply w-20 h-20 border-4 border-accent rounded-full;
+  border-block-start-color: transparent;
+  animation: rotate 1s ease-in-out infinite;
+}
+
+@keyframes rotate {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.color-box {
+  @apply w-6 h-6 rounded-full;
+}
+
+ul.pagination.no-border {
+  cursor: pointer;
+}
+ul.pagination li.active {
+  @apply bg-accent shadow-lg rounded-full shadow-accent;
+}
+ul.pagination li.active a {
+  @apply !text-white;
 }
